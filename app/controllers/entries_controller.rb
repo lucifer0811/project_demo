@@ -8,7 +8,7 @@ class EntriesController < ApplicationController
 
   def show
     @entry = Entry.find(params[:id])
-    @comments = @entry.comments.paginate(page: params[:page])
+    @comments = @entry.comments
   end
 
   def new
@@ -18,7 +18,7 @@ class EntriesController < ApplicationController
   def create
     @entry = current_user.entries.build(entry_params)
     if @entry.save
-      flash[:success] = "Micropost created!"
+      flash[:success] = "Entry created!"
       redirect_to root_url
     else
       @feed_items = []
