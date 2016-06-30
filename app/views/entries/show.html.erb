@@ -2,18 +2,20 @@
   <aside class="col-md-4">
     <section class="entry_info">
       <h1>
-        <%= @entry.user %>
-        <%= @entry.title %>
-        <%= @entry.content %>
+        <%= @entry.user.name %></br>
+        <%= @entry.title %></br>
+        <%= @entry.content %></br>
       </h1>
     </section>
   </aside>
   <div class="col-md-8">
     <% if @entry.comments.any? %>
+    <h2>Comment</h2></br>
       <ol class="comments">
-        <%= render @comments %>
+        <%= render @entry.comments %>
       </ol>
     <% end %>
   </div>
+  <h2>Add comment</h2>
   <%= render "shared/comment_form" %>
 </div>

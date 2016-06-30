@@ -3,18 +3,18 @@ class EntriesController < ApplicationController
   before_action :correct_user, only: :destroy
 
   def index
-    @entries = Entry.paginate(page: params[:page])
+    @entries = Entry.all
   end
 
   def show
     @entry = Entry.find(params[:id])
-    @comments = @entry.comments.paginate(page: params[:page])
+    @comments = @entry.comments
   end
 
   def create
   	@entry = current_user.entries.build(entry_params)
     if @entry.save
-      flash[:success] = "Micropost created!"
+      flash[:success] = "Entry created!"
       redirect_to root_url
     else
       @feed_items = []
@@ -32,7 +32,7 @@ class EntriesController < ApplicationController
   private
 
     def entry_params
-      params.require(:entry).permit(:content, :picture)
+      params.require(:entry).permit(:title, :content, :date_entry)
     end
 
     def correct_user
