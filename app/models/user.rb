@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :entries, dependent: :destroy
   attr_accessor :remember_token
   before_save { email.downcase! }
   mount_uploader :image, PictureUploader
@@ -37,6 +38,10 @@ class User < ActiveRecord::Base
   # Forgets a user.
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  def feed
+    Entry.where("user_id = ?", id)
   end
 
   private

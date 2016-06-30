@@ -1,5 +1,5 @@
-User.create!(name:  "Nguyen Ha Phan",
-             email: "nguyenhaphan@gmail.com",
+User.create!(name:  "admin",
+             email: "nhoxvip95@gmail.com",
              password:              "abc123",
              password_confirmation: "abc123",
              admin: true)
@@ -12,4 +12,10 @@ User.create!(name:  "Nguyen Ha Phan",
                email: email,
                password:              password,
                password_confirmation: password)
+end
+
+users = User.order(:created_at).take(6)
+20.times do
+  content = Faker::Lorem.sentence(5)
+  users.each { |user| user.entries.create!(content: content) }
 end
