@@ -2,7 +2,7 @@
   <aside class="col-md-4">
     <section class="user_info">
       <h1>
-        <%= @user.picture %>
+        <%= image_tag @user.image.url if @user.image? %>
         <%= @user.name %>
       </h1>
     </section>

@@ -184,4 +184,11 @@ input {
     padding: 10px 0;
     border-bottom: 1px solid $gray-lighter;
   }
+
+
+span.picture {
+  margin-top: 10px;
+  input {
+    border: 0;
+  }
 }
