@@ -3,7 +3,7 @@ class EntriesController < ApplicationController
   before_action :correct_user, only: :destroy
 
   def index
-    @entries = Entry.all
+    @entries =  Entry.paginate(page: params[:page])
   end
 
   def show
