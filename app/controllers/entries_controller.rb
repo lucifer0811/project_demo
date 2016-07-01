@@ -8,7 +8,7 @@ class EntriesController < ApplicationController
 
   def show
     @entry = Entry.find(params[:id])
-    @comments = @entry.comments
+    @comment = @entry.comments.new
   end
 
   def new
@@ -26,6 +26,20 @@ class EntriesController < ApplicationController
     end
   end
 
+  def update
+    @entry = Entry.find(params[:id])
+    if @entry.update_attributes(entry_params)
+      redirect_to @entry
+      # Handle a successful update
+    else
+      render :show
+    end
+  end
+
+  def edit
+    @entry = Entry.find(params[:id])
+  end
+
   def destroy
     @entry.destroy
     flash[:success] = "entry deleted"
@@ -36,7 +50,7 @@ class EntriesController < ApplicationController
   private
 
     def entry_params
-      params.require(:entry).permit(:title, :content, :date_entry)
+      params.require(:entry).permit(:title, :content, :user_id)
     end
 
     def correct_user

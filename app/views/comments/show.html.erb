@@ -2,8 +2,8 @@
   <aside class="col-md-4">
     <section class="entry_info">
       <h1>
-        <%= @comment.user.name %></br>
-        <%= @comment.content %></br>
+        <%= link_to @comment.user.name %></br>
+        <%= link_to @comment.content %></br>
         <%= @comment.date_entry %></br>
       </h1>
     </section>

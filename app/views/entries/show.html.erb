@@ -1,21 +1,22 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="entry_info">
-      <h1>
-        <%= @entry.user.name %></br>
-        <%= @entry.title %></br>
-        <%= @entry.content %></br>
-      </h1>
+      <h1><%= link_to @entry.user.name %></h1><br>
+      <span><%= @entry.content %></span>
+      <%= @entry.created_at %>
     </section>
   </aside>
-  <div class="col-md-8">
-    <% if @entry.comments.any? %>
-    <h2>Comment</h2></br>
-      <ol class="comments">
-        <%= render @entry.comments %>
-      </ol>
-    <% end %>
-  </div>
-  <h2>Add comment</h2>
-  <%= render "shared/comment_form" %>
+</div>
+<div class="col-md-8">
+  <% @entry.comments.each do |comment| %>
+    <%= comment.content %></br>
+  <% end %>
+</div>
+<div class = "row">
+<% if logged_in? %>
+  <% if current_user.following?(@entry.user) || current_user%>
+    <h1>Add comment</h1>
+  <%= render "comments/comment_form" %>
+  <% end %>
+<% end %>
 </div>

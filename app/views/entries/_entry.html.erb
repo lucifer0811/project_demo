@@ -11,6 +11,7 @@
     <% if current_user?(entry.user) %>
       <%= link_to "delete", entry, method: :delete,
                                        data: { confirm: "You sure?" } %>
+      <%= link_to "edit", edit_entry_path(entry) %>
     <% end %>
   </span>
   <br>
