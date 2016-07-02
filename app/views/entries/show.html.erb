@@ -12,11 +12,9 @@
     <%= comment.content %></br>
   <% end %>
 </div>
-<div class = "row">
 <% if logged_in? %>
   <% if current_user.following?(@entry.user) || current_user%>
     <h1>Add comment</h1>
   <%= render "comments/comment_form" %>
   <% end %>
 <% end %>
-</div>

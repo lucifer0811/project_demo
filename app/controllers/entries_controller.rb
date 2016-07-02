@@ -3,7 +3,7 @@ class EntriesController < ApplicationController
   before_action :correct_user, only: :destroy
 
   def index
-    @entries =  Entry.paginate(page: params[:page])
+    @entries = Entry.paginate(page: params[:page])
   end
 
   def show
@@ -44,11 +44,9 @@ class EntriesController < ApplicationController
     @entry.destroy
     flash[:success] = "entry deleted"
     redirect_to request.referrer || root_url
-
   end
 
   private
-
     def entry_params
       params.require(:entry).permit(:title, :content, :user_id)
     end
