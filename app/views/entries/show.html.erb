@@ -4,17 +4,20 @@
       <h1><%= link_to @entry.user.name %></h1><br>
       <span><%= @entry.content %></span>
       <%= @entry.created_at %>
+      <p>Comments</p>
+      <div class="col-md-8">
+        <% @entry.comments.each do |comment| %>
+          <%= comment.content %> 
+          <%= comment.created_at %></br>
+        <% end %>
+      </div>
     </section>
   </aside>
+  <div class="col-md-8">
+    <% if logged_in? %>
+      <% if current_user.following?(@entry.user) || @entry.user == current_user %>
+          <%= render "comments/comment_form" %>
+      <% end %>
+    <% end %>
+  </div>
 </div>
-<div class="col-md-8">
-  <% @entry.comments.each do |comment| %>
-    <%= comment.content %></br>
-  <% end %>
-</div>
-<% if logged_in? %>
-  <% if current_user.following?(@entry.user) || current_user%>
-    <h1>Add comment</h1>
-  <%= render "comments/comment_form" %>
-  <% end %>
-<% end %>
